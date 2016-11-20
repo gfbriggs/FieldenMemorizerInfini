@@ -1,6 +1,10 @@
-angular.module('tp2', ['ngRoute','tp2.memo','Service'])
+angular.module('tp2', ['ngRoute','tp2.memo','tp2.addmemo','Service'])
     .config (['$routeProvider', function($routeProvider){
-        $routeProvider.when('/memo', {
+        $routeProvider.when('/addmemo',{
+           templateUrl: 'addmemo/addmemo.html',
+            controller : 'AddMemoController'
+        });
+        $routeProvider.when('/memo', {  
             templateUrl: 'memo/memo.html',
             controller : 'MemoController'
         });
