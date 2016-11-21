@@ -4,8 +4,8 @@
             <h3>Memos</h3>
             <ul>
                 <div ng-repeat="Memo in listememos">
-                    <a ng-click="setMemo(Memo.id)">
-                        <li>{{Memo.titrememo}}</li>
+                    <a ng-click="setMemo(Memo.MemoID)">
+                        <li>{{Memo.Titre}}</li>
                     </a>
                 </div>
             </ul>
@@ -13,9 +13,14 @@
         <div class="col-md-9">
             <h2>{{memotitre}}</h2>
             <form ng-submit="addOrUpdateMemo()">
-                <textarea id="memoenter" ng-model="memoContenu" ></textarea>
-                <div id="btnAjout" class="container row">
+                <textarea id="memoenter" ng-model="memoContenu" >{{memoContenu}}</textarea>
+                <div class="container row">
                     <input type="submit" class="btn btn-default" value="Update">
+                </div>
+            </form>
+            <form ng-submit="getMemos()">
+                <div class="container row">
+                    <input type="submit" class="btn btn-default" value="Fetch memos">
                 </div>
             </form>
         </div>

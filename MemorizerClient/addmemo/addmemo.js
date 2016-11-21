@@ -4,7 +4,7 @@
 angular.module('tp2.addmemo',[])   
     .controller("AddMemoController" , AddMemoController);
 
-function AddMemoController($scope,$rootScope,Service)
+function AddMemoController($scope,$rootScope,Service, $location)
 {
     // Initialisation des variables du scope
     $scope.Service = Service;
@@ -14,5 +14,6 @@ function AddMemoController($scope,$rootScope,Service)
     // Méthode qui invoke la méthode de service pour ajouter un memo
     $scope.addMemo = function () {
         Service.addMemo($scope.titrememo,$scope.contenu);
+        $location.path('/memo');
     }
 }
