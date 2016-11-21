@@ -22,7 +22,7 @@ namespace FieldenMemorizer.Models
             return userIdentity;
         }
 
-        [InverseProperty("Utilisateur")]
+        [InverseProperty("ApplicationUser")]
         public ICollection<Memo> Memos { get; set; }
     }
 
@@ -32,7 +32,7 @@ namespace FieldenMemorizer.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
             Database.SetInitializer(new Initializer());
-            Database.Initialize(true);
+            Database.Initialize(false);
         }
 
         public static ApplicationDbContext Create()
@@ -51,11 +51,11 @@ namespace FieldenMemorizer.Models
             ApplicationUser user = new ApplicationUser();
             user.UserName = "User1";         
             user.Email = "test@test.com";
-            IdentityResult result = mgr.Create(user, "asfuig12478");
+            mgr.Create(user, "Passw0rd!");
 
-            context.Memos.Add(new Memo { Text = "Note 1", Titre = "Title 1", date = DateTime.Now, Utilisateur = user });
-            context.Memos.Add(new Memo { Text = "Note 2", Titre = "Title 2", date = DateTime.Now, Utilisateur = user });
-            context.Memos.Add(new Memo { Text = "Note 3", Titre = "Title 3", date = DateTime.Now, Utilisateur = user });
+            context.Memos.Add(new Memo { Text = "Note 1", Titre = "Title 1", date = DateTime.Now });
+            context.Memos.Add(new Memo { Text = "Note 2", Titre = "Title 2", date = DateTime.Now });
+            context.Memos.Add(new Memo { Text = "Note 3", Titre = "Title 3", date = DateTime.Now });
         }
     }
 }

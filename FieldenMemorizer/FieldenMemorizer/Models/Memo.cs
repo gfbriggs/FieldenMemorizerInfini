@@ -16,10 +16,12 @@ namespace FieldenBriggsMemorizerInfini.Models
        public string Titre { get; set; }
        [Required]
        public string Text { get; set; }
-       [Required, DataType(DataType.DateTime)]
+       [DataType(DataType.DateTime)]
        public DateTime date { get; set; }
-       [InverseProperty("Memos")]
-       public virtual ApplicationUser Utilisateur { get; set;}
+        [ForeignKey("ApplicationUser")]
+        public string Id { get; set; }
+        [InverseProperty("Memos")]
+       public virtual ApplicationUser ApplicationUser { get; set;}
       
     }
 }

@@ -13,17 +13,20 @@ using FieldenMemorizer.Models;
 
 namespace FieldenMemorizer.Controllers
 {
+   [RoutePrefix("api/Memos")]
     public class MemosController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/Memos
         [HttpGet]
-        public IQueryable<Memo> GetMemos()
+        [Route("GetMemos")]
+        [ResponseType(typeof(List<Memo>))]
+        public IHttpActionResult GetMemos()
         {
-            return db.Memos;
+            return Ok(db.Memos.ToList());
         }
-
+        [HttpGet]
         // GET: api/Memos/5
         [ResponseType(typeof(Memo))]
         public IHttpActionResult GetMemo(int id)
@@ -36,51 +39,37 @@ namespace FieldenMemorizer.Controllers
 
             return Ok(memo);
         }
-
-        // PUT: api/Memos/5
+        
+        [Route("ChangeMemo")]
+        [HttpPost]
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutMemo(int id, Memo memo)
+        public IHttpActionResult ChangeMemo(Memo memo)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != memo.MemoID)
-            {
-                return BadRequest();
-            }
-
             db.Entry(memo).State = EntityState.Modified;
 
-            try
-            {
                 db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MemoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/Memos
+        [HttpPost]
+        [Route("AddMemo")]
         [ResponseType(typeof(Memo))]
-        public IHttpActionResult PostMemo(Memo memo)
+        public IHttpActionResult AddMemo(Memo memo)
         {
+            memo.date = DateTime.Now;
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
+            
             db.Memos.Add(memo);
             db.SaveChanges();
 
