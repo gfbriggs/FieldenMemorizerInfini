@@ -10,6 +10,8 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using FieldenBriggsMemorizerInfini.Models;
 using FieldenMemorizer.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace FieldenMemorizer.Controllers
 {
@@ -19,15 +21,15 @@ namespace FieldenMemorizer.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/Memos
-        [HttpGet]
+       
         [Route("GetMemos")]
+        [HttpGet]
         [ResponseType(typeof(List<Memo>))]
         public IHttpActionResult GetMemos()
         {
             return Ok(db.Memos.ToList());
         }
         [HttpGet]
-        // GET: api/Memos/5
         [ResponseType(typeof(Memo))]
         public IHttpActionResult GetMemo(int id)
         {
@@ -64,7 +66,10 @@ namespace FieldenMemorizer.Controllers
         public IHttpActionResult AddMemo(Memo memo)
         {
             memo.date = DateTime.Now;
-            
+            ApplicationUserManager usermanager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            ApplicationUser user = usermanager.FindById(User.Identity.GetUserId());
+
+            memo.Id = user.Id;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

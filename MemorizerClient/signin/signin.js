@@ -7,8 +7,19 @@ function SignInController($scope,Service,$location) {
 
     $scope.email = "";
     $scope.password= "";
+
     // On fait le log
     $scope.login = function () {
         Service.login($scope.email,$scope.password);
+
+         var token = localStorage.getItem(Service.TOKEN_KEY);
+        if(token)
+        {
+            $location.path('/memo');
+        }
+        else
+        {
+            alert("Mauvais log in!");
+        }
     }
 }

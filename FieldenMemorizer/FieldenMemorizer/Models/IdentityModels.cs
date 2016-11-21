@@ -52,10 +52,6 @@ namespace FieldenMemorizer.Models
             user.UserName = "User1";         
             user.Email = "test@test.com";
             mgr.Create(user, "Passw0rd!");
-
-            context.Memos.Add(new Memo { Text = "Note 1", Titre = "Title 1", date = DateTime.Now });
-            context.Memos.Add(new Memo { Text = "Note 2", Titre = "Title 2", date = DateTime.Now });
-            context.Memos.Add(new Memo { Text = "Note 3", Titre = "Title 3", date = DateTime.Now });
         }
     }
 }

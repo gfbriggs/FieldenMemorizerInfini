@@ -8,7 +8,7 @@ angular.module('tp2.memo',[])
     .run(function (Service) {
     Service.memos();
 });
-function MemoController($scope, $http, $rootScope, Service) {
+function MemoController($scope, Service, $location) {
 
     // On scope le service
 
@@ -50,4 +50,8 @@ function MemoController($scope, $http, $rootScope, Service) {
            $scope.memoCourant = Service.memo;
             $scope.updateinfo();
     }});
+
+    $scope.addPage = function () {
+       $location.path("/addmemo");
+    }
 }

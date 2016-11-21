@@ -9,21 +9,27 @@ angular.module('tp2', ['ngRoute','tp2.memo','tp2.addmemo','tp2.signin','Service'
             controller : 'MemoController'
         });
         $routeProvider.when('/', {
-            templateUrl: 'memo/memo.html',
-            controller : 'MemoController'
+            templateUrl: 'signin/signin.html',
+            controller : 'SignInController'
+        });
+        $routeProvider.when('/signin', {
+            templateUrl: 'signin/signin.html',
+            controller : 'SignInController'
         });
         $routeProvider.otherwise({
-            redirectTo: '/'
+            redirectTo: '/signin',
+            controller : 'SignInController'
         });
 
         
     }]);
     // Voici mon module de service qui va effectuer tout les méthodes de service :)))
     angular.module('Service', [])
-    .service('Service', function ($http) {
+    .service('Service', function ($http, $location) {
           that = this;
           this.memo = {Titre:"", Text:"", MemoID:0};
           this.listememos = ["Memos"];
+        this.TOKEN_KEY = "TOKEN";
         // La liste de base de test pour le mock de l'application
         this.memos = function () {
             $http({
@@ -61,7 +67,6 @@ angular.module('tp2', ['ngRoute','tp2.memo','tp2.addmemo','tp2.signin','Service'
 
         // Méthode qui fait la mise a jour d'un memo
         this.addOrUpdateMemo = function (memo) {
-
             // requete pour le update
             $http({
                 method:'POST',
@@ -74,18 +79,34 @@ angular.module('tp2', ['ngRoute','tp2.memo','tp2.addmemo','tp2.signin','Service'
         // Méthode qui ajoute un memo à la liste.
         this.addMemo  = function (titreMemo,ContenuMemo) {
             this.memoAAjouter = { Titre: titreMemo , Text : ContenuMemo};
-            console.log(this.memoAAjouter);
+            var token = localStorage.getItem(that.TOKEN_KEY);
+            var headers = {};
+            if (token) {
+                headers.Authorization = 'Bearer ' + token;
+            }
             $http({
                 method:'POST',
                 url: 'http://localhost:3771/api/Memos/AddMemo/',
-                headers:{Authorization : 'Bearer ' + localStorage.getItem('Token')},
+                headers: headers,
                 data: this.memoAAjouter
             })
         };
 
         // Méthode de login
         this.login = function (email, password) {
-
+            $.ajax({
+                method: 'POST',
+                url: 'http://localhost:3771/Token',
+                data: {
+                    grant_type: 'password',
+                    username: email,
+                    password: password
+                }
+            }).success(function (data) {
+                console.log(data);
+                localStorage.setItem( that.TOKEN_KEY , data.access_token);
+                $location.path('/memo');
+            })
         }
     });
 
