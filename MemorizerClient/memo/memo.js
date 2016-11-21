@@ -15,12 +15,10 @@ function MemoController($scope, Service, $location) {
     $scope.Service = Service;
     $scope.memotitre = "Aucun selectioné!";
     $scope.memoContenu = "Aucun selectioné!";
-    $scope.memoID = 0;
-    // on mets des variables en attendant
 
-    $scope.memoCourant = {Titre:"Aucun", Text:"Aucun", MemoID:0};
     // On get la liste de memo
     Service.memos();
+
     // Va changer l'affichage du memo courant et le memo courant lui même
 
 

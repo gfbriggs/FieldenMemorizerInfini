@@ -89,7 +89,7 @@ angular.module('tp2', ['ngRoute','tp2.memo','tp2.addmemo','tp2.signin','Service'
                 url: 'http://localhost:3771/api/Memos/AddMemo/',
                 headers: headers,
                 data: this.memoAAjouter
-            })
+            });
         };
 
         // Méthode de login
