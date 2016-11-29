@@ -14,6 +14,7 @@ function AddMemoController($scope,$rootScope,Service, $location)
     // Méthode qui invoke la méthode de service pour ajouter un memo
     $scope.addMemo = function () {
         Service.addMemo($scope.titrememo,$scope.contenu);
+        Service.memos();
         $location.path('/memo');
     }
 }

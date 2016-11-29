@@ -1,4 +1,4 @@
-angular.module('tp2', ['ngRoute','tp2.memo','tp2.addmemo','tp2.signin','Service'])
+angular.module('tp2', ['ngRoute','tp2.memo','tp2.addmemo','tp2.signin','tp2.websocket','Service'])
     .config (['$routeProvider', function($routeProvider){
         $routeProvider.when('/addmemo',{
            templateUrl: 'addmemo/addmemo.html',
@@ -20,12 +20,16 @@ angular.module('tp2', ['ngRoute','tp2.memo','tp2.addmemo','tp2.signin','Service'
             redirectTo: '/signin',
             controller : 'SignInController'
         });
+        $routeProvider.when('/websocket',{
+           templateUrl:'websocket/websocket.html',
+            controller:'WebCtrl'
+        });
 
         
     }]);
     // Voici mon module de service qui va effectuer tout les méthodes de service :)))
     angular.module('Service', [])
-    .service('Service', function ($http, $location) {
+    .service('Service', function ($http, $location, $timeout) {
           that = this;
           this.memo = {Titre:"", Text:"", MemoID:0};
           this.listememos = ["Memos"];
@@ -39,8 +43,9 @@ angular.module('tp2', ['ngRoute','tp2.memo','tp2.addmemo','tp2.signin','Service'
             }).then(function successCallback(response) {
                 // this callback will be called asynchronously
                 // when the response is available
-                that.listememos = response.data;
-                console.log(response);
+                    that.listememos = response.data;
+                console.log(response.data);
+
             }, function errorCallback(response) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
@@ -83,6 +88,7 @@ angular.module('tp2', ['ngRoute','tp2.memo','tp2.addmemo','tp2.signin','Service'
             var headers = {};
             if (token) {
                 headers.Authorization = 'Bearer ' + token;
+                console.log(headers.Authorization);
             }
             $http({
                 method:'POST',
@@ -101,14 +107,27 @@ angular.module('tp2', ['ngRoute','tp2.memo','tp2.addmemo','tp2.signin','Service'
                     grant_type: 'password',
                     username: email,
                     password: password
+                },
+                complete: function (response) {
+                    console.log(response);
+                    $timeout(function () {
+                        if(response.status == 400)
+                        {
+                            alert("Mauvais log in!")
+                        }
+                        else
+                        {
+                            console.log(response.responseJSON.access_token);
+                            localStorage.setItem( that.TOKEN_KEY , response.responseJSON.access_token);
+                            $location.path('/memo');
+                        }
+                    });
+
                 }
-            }).success(function (data) {
-                console.log(data);
-                localStorage.setItem( that.TOKEN_KEY , data.access_token);
-                $location.path('/memo');
-            })
+            });
         }
     });
+
 
 
 

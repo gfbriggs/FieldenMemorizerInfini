@@ -5,17 +5,14 @@
 angular.module('tp2.memo',[])
 
     .controller("MemoController" , MemoController)
-    .run(function (Service) {
-    Service.memos();
-});
-function MemoController($scope, Service, $location) {
+function MemoController($scope, Service, $location, $timeout) {
 
     // On scope le service
 
     $scope.Service = Service;
     $scope.memotitre = "Aucun selectioné!";
     $scope.memoContenu = "Aucun selectioné!";
-
+    $scope.listememos = Service.listememos;
     // On get la liste de memo
     Service.memos();
 
@@ -39,7 +36,11 @@ function MemoController($scope, Service, $location) {
     // On se mets un watch sur les memos du service pour ajuster notre scope!
     $scope.$watch('Service.listememos', function (newVal, oldVal, scope) {
         if(newVal) {
-            $scope.listememos = Service.listememos;
+
+            $timeout(function () {
+                $scope.listememos = Service.listememos;
+            });
+
         }
     });
 
