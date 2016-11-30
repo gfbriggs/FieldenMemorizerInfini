@@ -11,6 +11,9 @@ function SignInController($scope,Service,$location) {
     // On fait le log
     $scope.login = function () {
         Service.login($scope.email,$scope.password);
+    };
 
+    $scope.signup = function () {
+        $location.path("/signup");
     }
 }

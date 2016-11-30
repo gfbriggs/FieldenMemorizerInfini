@@ -6,3 +6,33 @@
     width: 200px;
     height: 20px;
 }
+
+nav.navbar-default.navbar {
+    background-image: none;
+    background-color: darkgreen;
+
+}
+
+nav.navbar-default a.navbar-brand{
+    color: aliceblue;
+}
+body{
+    background-color: darkred;
+    color: aliceblue;
+}
+
+input{
+    color:black;
+}
+
+textarea{
+    color: black;
+}
+
+ul{
+    list-style-type: none;
+}
+ul li{
+    text-decoration: none;
+    color: aliceblue;
+}

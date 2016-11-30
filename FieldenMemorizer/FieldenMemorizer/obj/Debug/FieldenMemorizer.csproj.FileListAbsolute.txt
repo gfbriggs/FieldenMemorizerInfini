@@ -349,3 +349,5 @@ D:\Projects\FieldenMemorizerInfini\FieldenMemorizer\FieldenMemorizer\bin\fr\Syst
 D:\Projects\FieldenMemorizerInfini\FieldenMemorizer\FieldenMemorizer\obj\Debug\FieldenMemorizer.csprojResolveAssemblyReference.cache
 D:\Projects\FieldenMemorizerInfini\FieldenMemorizer\FieldenMemorizer\obj\Debug\FieldenMemorizer.dll
 D:\Projects\FieldenMemorizerInfini\FieldenMemorizer\FieldenMemorizer\obj\Debug\FieldenMemorizer.pdb
+C:\Espace Labo\FieldenMemorizerInfini\FieldenMemorizer\FieldenMemorizer\obj\Debug\FieldenMemorizer.csprojResolveAssemblyReference.cache
+C:\FieldenMemorizer\FieldenMemorizer\obj\Debug\FieldenMemorizer.csprojResolveAssemblyReference.cache

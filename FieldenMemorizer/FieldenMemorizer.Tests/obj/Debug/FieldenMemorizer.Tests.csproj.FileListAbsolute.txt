@@ -84,3 +84,5 @@ C:\Espace Labo\FieldenMemorizer\FieldenMemorizer.Tests\bin\Debug\fr\EntityFramew
 C:\Espace Labo\FieldenMemorizer\FieldenMemorizer.Tests\obj\Debug\FieldenMemorizer.Tests.csprojResolveAssemblyReference.cache
 C:\Espace Labo\FieldenMemorizer\FieldenMemorizer.Tests\obj\Debug\FieldenMemorizer.Tests.dll
 C:\Espace Labo\FieldenMemorizer\FieldenMemorizer.Tests\obj\Debug\FieldenMemorizer.Tests.pdb
+C:\Espace Labo\FieldenMemorizerInfini\FieldenMemorizer\FieldenMemorizer.Tests\obj\Debug\FieldenMemorizer.Tests.csprojResolveAssemblyReference.cache
+C:\FieldenMemorizer\FieldenMemorizer.Tests\obj\Debug\FieldenMemorizer.Tests.csprojResolveAssemblyReference.cache

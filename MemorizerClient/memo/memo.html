@@ -1,3 +1,25 @@
+<nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <a class="navbar-brand" >Memorizer infini : Holiday version</a>
+    </div>
+
+    <form class="navbar-form navbar-left" ng-submit="signout()">
+        <div>
+            <input type="submit" class="btn btn-default" value="Signout">
+        </div>
+    </form>
+    <form class="navbar-form navbar-left" ng-submit="addPage()">
+        <div class="container row">
+            <input type="submit" class="btn btn-default" value="Add new memo">
+        </div>
+    </form>
+    <form class="navbar-form navbar-left" ng-submit="chat()">
+        <div class="container row">
+            <input type="submit" class="btn btn-default" value="Chatroom">
+        </div>
+    </form>
+</nav>
+
 <div class="container">
     <div class="row">
         <div class="col-md-3">
@@ -15,20 +37,10 @@
             <form ng-submit="addOrUpdateMemo()">
                 <textarea id="memoenter" ng-model="memoContenu" >{{memoContenu}}</textarea>
                 <div class="container row">
-                    <input type="submit" class="btn btn-default" value="Update">
-                </div>
-            </form>
-            <form ng-submit="getMemos()">
-                <div class="container row">
-                    <input type="submit" class="btn btn-default" value="Fetch memos">
+                    <input type="submit" class="btn btn-default" value="Update current">
                 </div>
             </form>
 
-            <form ng-submit="addPage()">
-                <div class="container row">
-                    <input type="submit" class="btn btn-default" value="Add new memo">
-                </div>
-            </form>
         </div>
     </div>
 

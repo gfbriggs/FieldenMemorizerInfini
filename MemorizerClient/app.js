@@ -1,4 +1,4 @@
-angular.module('tp2', ['ngRoute','tp2.memo','tp2.addmemo','tp2.signin','tp2.websocket','Service'])
+angular.module('tp2', ['ngRoute','tp2.memo','tp2.addmemo','tp2.signin','tp2.websocket','tp2.signup','Service'])
     .config (['$routeProvider', function($routeProvider){
         $routeProvider.when('/addmemo',{
            templateUrl: 'addmemo/addmemo.html',
@@ -16,14 +16,19 @@ angular.module('tp2', ['ngRoute','tp2.memo','tp2.addmemo','tp2.signin','tp2.webs
             templateUrl: 'signin/signin.html',
             controller : 'SignInController'
         });
+        $routeProvider.when('/websocket',{
+            templateUrl:'websocket/websocket.html',
+            controller:'WebCtrl'
+        });
+        $routeProvider.when('/signup',{
+            templateUrl: 'signup/signup.html',
+            controller:'SignUpController'
+        });
         $routeProvider.otherwise({
             redirectTo: '/signin',
             controller : 'SignInController'
         });
-        $routeProvider.when('/websocket',{
-           templateUrl:'websocket/websocket.html',
-            controller:'WebCtrl'
-        });
+
 
         
     }]);
@@ -124,6 +129,40 @@ angular.module('tp2', ['ngRoute','tp2.memo','tp2.addmemo','tp2.signin','tp2.webs
                     });
 
                 }
+            });
+        };
+
+        this.signout = function () {
+            var token = localStorage.getItem(that.TOKEN_KEY);
+            var headers = {};
+            if (token) {
+                headers.Authorization = 'Bearer ' + token;
+                console.log(headers.Authorization);
+            }
+            $.ajax({
+                method:'POST',
+                url:'http://localhost:3771/api/Account/Logout',
+                headers: headers,
+                success:function (data) {
+                    console.log(data);
+                    localStorage.removeItem(that.TOKEN_KEY);
+                }
+            });
+        }
+
+        this.register = function(user,email,password) {
+            $.ajax({
+                method:'POST',
+                url: "http://localhost:3771/api/Account/Register",
+                data:
+                {
+                    Email: email,
+                    Password: password,
+                    ConfirmPassword: password
+                }
+
+            }).success(function(data) {
+                console.log(data);
             });
         }
     });

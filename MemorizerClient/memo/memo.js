@@ -4,7 +4,7 @@
 
 angular.module('tp2.memo',[])
 
-    .controller("MemoController" , MemoController)
+    .controller("MemoController" , MemoController);
 function MemoController($scope, Service, $location, $timeout) {
 
     // On scope le service
@@ -52,5 +52,14 @@ function MemoController($scope, Service, $location, $timeout) {
 
     $scope.addPage = function () {
        $location.path("/addmemo");
+    };
+
+    $scope.signout = function(){
+        Service.signout();
+        $location.path("/");
+    };
+
+    $scope.chat = function () {
+        $location.path("/websocket");
     }
 }
